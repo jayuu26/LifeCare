@@ -207,7 +207,7 @@ public class HomeMajorCategoryFragment extends Fragment implements HomeListGridA
 
     private void loadSubCategory(int id) {
 
-        if (AppUtills.isNetworkAvailable(mContext)) {
+        if (AppUtills.isNetworkAvailable(mContext) && false) {
             final ProgressDialog dialog = AppUtills.showProgressDialog(getActivity());
             final Call<ResponseBody> respo =null;// = service.getMainCategoryByUserId("");
             respo.enqueue(new Callback<ResponseBody>() {

@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import com.thunder.lifecare.GreenDao.daomodel.Category;
 import com.thunder.lifecare.R;
 import com.thunder.lifecare.adapter.CategoryListAdapter;
-import com.thunder.lifecare.fragment.DetailFragment.CategoryDetailFragment;
+import com.thunder.lifecare.fragment.DetailFragment.SubCategoryDetailListFragment;
 import com.thunder.lifecare.util.AppUtills;
 
 import java.util.ArrayList;
@@ -77,6 +77,6 @@ public class SubCategoryFragment extends Fragment implements CategoryListAdapter
 
     @Override
     public void OnCategoryClick(Category category) {
-        AppUtills.loadFragment(CategoryDetailFragment.Single.INSTANCE.getInstance(),getActivity(),R.id.container);
+        AppUtills.loadFragment(SubCategoryDetailListFragment.Single.INSTANCE.getInstance(),getActivity(),R.id.container);
     }
 }
