@@ -1,5 +1,6 @@
 package com.thunder.lifecare.fragment.Home;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,16 +20,26 @@ import com.thunder.lifecare.GreenDao.daodbhelper.HomeRootObjectDBHelper;
 import com.thunder.lifecare.Listener.PageSelectedListener;
 import com.thunder.lifecare.R;
 import com.thunder.lifecare.adapter.HomeListGridAdapter;
+import com.thunder.lifecare.constant.MessageConstant;
 import com.thunder.lifecare.fragment.BaseHomeFragment;
 import com.thunder.lifecare.fragment.SubCategory.Doctor.SubCategoryFragment;
 import com.thunder.lifecare.GreenDao.daomodel.HomeCategory;
 import com.thunder.lifecare.GreenDao.daomodel.HomeRootObject;
+import com.thunder.lifecare.rest.RestCall;
+import com.thunder.lifecare.rest.RestClient;
 import com.thunder.lifecare.util.AppLog;
 import com.thunder.lifecare.util.AppUtills;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeMajorCategoryFragment extends Fragment implements HomeListGridAdapter.OnClickListner {
 
@@ -38,6 +49,7 @@ public class HomeMajorCategoryFragment extends Fragment implements HomeListGridA
     private GridLayoutManager lLayout;
     Context mContext;
     ArrayList<HomeCategory> homeCategoriesList;
+    RestCall service ;
 
     public enum Single {
         INSTANCE;
@@ -68,9 +80,8 @@ public class HomeMajorCategoryFragment extends Fragment implements HomeListGridA
                              Bundle savedInstanceState) {
         mContext = getActivity();
         ViewGroup mainView = (ViewGroup) inflater.inflate(R.layout.search_layout_frag, container, false);
-//        BaseHomeFragment.Single.INSTANCE.getInstance().initListner(this);
+        service = RestClient.Single.INSTANCE.getInstance().getRestCallsConnection(mContext);
         return mainView;
-//        return inflater.inflate(R.layout.search_layout_frag, null);
     }
 
     @Override
@@ -93,9 +104,8 @@ public class HomeMajorCategoryFragment extends Fragment implements HomeListGridA
 
     @Override
     public void onClick(int position) {
-        AppUtills.loadFragment(SubCategoryFragment.Single.INSTANCE.getInstance(),getActivity(),R.id.container);
+        loadSubCategory(position);
     }
-
 
     public void onPageSelected(int position) {
         AppUtills.setActionBarTitle("Home","Sub-Home", ((AppCompatActivity) getActivity()).getSupportActionBar(), getActivity(), false);
@@ -194,5 +204,47 @@ public class HomeMajorCategoryFragment extends Fragment implements HomeListGridA
 //            });
 //        }
     }
+
+    private void loadSubCategory(int id) {
+
+        if (AppUtills.isNetworkAvailable(mContext)) {
+            final ProgressDialog dialog = AppUtills.showProgressDialog(getActivity());
+            final Call<ResponseBody> respo =null;// = service.getMainCategoryByUserId("");
+            respo.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if (response.code() == HttpURLConnection.HTTP_OK) {
+                        try {
+                            String json = "";
+                            if (response != null) json = response.body().string();{
+                            System.out.println("onResponse " + json);
+
+                            if (json.contains("errorMsg")) {
+
+                            } else {
+
+                            }
+                        }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }else{
+                        Toast.makeText(getActivity(), MessageConstant.GENERIC_ERROR, Toast.LENGTH_LONG).show();
+                    }
+                }
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                }
+            });
+
+            AppUtills.hideProgressDialog(dialog);
+        }else{
+            Toast.makeText(mContext, ""+ MessageConstant.CONNECTION_ERROR, Toast.LENGTH_SHORT).show();
+        }
+
+        AppUtills.loadFragment(SubCategoryFragment.Single.INSTANCE.getInstance(), getActivity(), R.id.container);
+    }
+
 
 }
