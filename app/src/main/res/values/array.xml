@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array
+        name="home_icon">
+        <item>@drawable/doctor_one</item>
+        <item>@drawable/gym</item>
+        <item>@drawable/yoga</item>
+        <item>@drawable/diagnosis</item>
+        <item>@drawable/sports_club</item>
+        <item>@drawable/hospital</item>
+        <item>@drawable/health_club</item>
+        <item>@drawable/medical_store</item>
+    </array>
+
+    <array
+        name="home_sel_icon">
+        <item>@drawable/doctor_one</item>
+        <item>@drawable/gym</item>
+        <item>@drawable/yoga</item>
+        <item>@drawable/diagnosis</item>
+        <item>@drawable/sports_club</item>
+        <item>@drawable/hospital</item>
+        <item>@drawable/health_club</item>
+        <item>@drawable/medical_store</item>
+    </array>
+
+
+</resources>

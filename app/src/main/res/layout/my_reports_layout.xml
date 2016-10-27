@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/record_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:measureAllChildren="true">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/my_reports_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="1dp"
+        android:scrollbars="vertical"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <com.thunder.lifecare.customlayout.SlidingTabLayout
+            android:id="@+id/tabanim_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/side_nav_bar"
+            android:elevation="2dp" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/tabanim_viewpager"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tabanim_tabs"
+            android:layout_weight="0.79" />
+    </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add_reports"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="10dp"
+        android:padding="5dp"
+        android:src="@drawable/ic_add_circle_green_dark_24dp">
+
+    </android.support.design.widget.FloatingActionButton>
+
+    <include layout="@layout/fab_layout" />
+
+    <RelativeLayout
+        android:id="@+id/record_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:visibility="gone">
+
+        <include layout="@layout/add_record_dialog" />
+    </RelativeLayout>
+
+</FrameLayout>

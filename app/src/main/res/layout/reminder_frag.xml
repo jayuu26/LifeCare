@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <Button
+        android:id="@+id/reminder_done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/app_color"
+        android:text="Done"
+        android:textSize="18dp"
+        android:textColor="@color/text_color_white"/>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@id/reminder_done">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/medicine_name_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text"
+            android:layout_margin="5dp"
+            app:errorTextAppearance="@style/error_appearance"
+            app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
+
+            <EditText
+                android:id="@+id/medicine_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Medicine / Reminder Name"
+                android:paddingLeft="8dp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/image_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/medicine_name_layout"
+            android:text="Medicine / Prescribtion Image"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="18dp"/>
+
+        <LinearLayout
+            android:id="@+id/medicine_layout"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:layout_below="@id/image_text"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corner_border"
+                android:orientation="vertical"
+                android:padding="1dp" >
+
+                <ImageView
+                    android:id="@+id/medicine_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/image_placeholder"/>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView_delete"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="-35dp"
+                android:layout_marginBottom="5dp"
+                android:src="@mipmap/delete_img"
+                android:layout_gravity="bottom"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/daily_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/medicine_layout"
+            android:text="Daily Schedule"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="18dp"/>
+
+        <LinearLayout
+            android:id="@+id/schedule_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_below="@id/daily_text"
+            android:background="@drawable/rounded_corner_border"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/morning_image"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/ic_morning"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Morning"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="18dp"/>
+
+                <TextView
+                    android:id="@+id/morning_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="8:00"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:textSize="18dp"/>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/light_grey"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/afternoon_image"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/ic_afternoon"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Afternoon"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="18dp"/>
+
+                <TextView
+                    android:id="@+id/afternoon_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2:00"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:textSize="18dp"/>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/light_grey"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/evening_image"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/ic_evening"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Evening"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="18dp"/>
+
+                <TextView
+                    android:id="@+id/evening_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="8:00"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:textSize="18dp"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/duration_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/schedule_layout"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Duration"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:textSize="18dp"/>
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/duration_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/spinner_icon_new"
+                android:entries="@array/duration"
+                android:gravity="center_vertical"
+                android:minHeight="35dp"
+                android:popupBackground="#ffffff"
+                android:textSize="14dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/quantity_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/duration_layout"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quantity"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:textSize="18dp"/>
+
+            <RelativeLayout
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:padding="5dp"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true">
+
+                <ImageView
+                    android:id="@+id/minus"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:padding="5dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_add_value"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:id="@+id/quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1.25"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="10dp"
+                    android:textSize="18dp"/>
+
+                <ImageView
+                    android:id="@+id/add"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="5dp"
+                    android:padding="5dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_remove_value"
+                    android:scaleType="fitXY" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

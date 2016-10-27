@@ -1,0 +1,55 @@
+{
+  "category": "Home",
+  "name": "Home",
+  "type": "Grid",
+  "homeCategory": [
+    {
+      "id": 1,
+      "name": "Doctors",
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png",
+      "itemUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png"
+    },
+    {
+      "id": 2,
+      "name": "Gyms",
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png",
+      "itemUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png"
+    },
+    {
+      "id": 3,
+      "name": "Yoga/Meditation Centers",
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png",
+      "itemUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png"
+    },
+    {
+      "id": 4,
+      "name": "Diagnosis Labs",
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png",
+      "itemUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png"
+    },
+    {
+      "id":5,
+      "name": "Sports/Athletic Clubs",
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png",
+      "itemUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png"
+    },
+    {
+      "id":6,
+      "name": "Hospitals",
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png",
+      "itemUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png"
+    },
+    {
+      "id":7,
+      "name": "Health Clubs",
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png",
+      "itemUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png"
+    },
+    {
+      "id":8,
+      "name": "Medical Store",
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png",
+      "itemUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png"
+    }
+  ]
+}

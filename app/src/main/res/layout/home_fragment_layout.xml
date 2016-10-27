@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/text_color_white"
+    android:fitsSystemWindows="true">
+
+
+    <LinearLayout
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/light_grey"
+        android:gravity="top"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Banner Area "
+            android:textColor="@color/app_color"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/findLocation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_grey"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:visibility="invisible"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Location : "
+                android:textColor="@color/app_color"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Shivaji Nagar, Indore"
+                android:textColor="@color/app_color"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="8dp"
+            android:layout_weight="0.2"
+            android:src="@drawable/ic_frwd_arrow_green_24dp" />
+
+    </LinearLayout>
+
+
+    <com.gigamole.navigationtabbar.ntb.NavigationTabBar
+        android:id="@+id/ntb_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="8dp"
+        app:ntb_bg_color="@color/colorPrimaryDark"
+        app:ntb_active_color="@color/colorPrimary"
+        app:ntb_inactive_color="#ffffffff"
+        app:ntb_title_size="12dp"
+
+        app:ntb_badge_gravity="top"
+        app:ntb_badge_position="right"
+        app:ntb_badged="true"
+        app:ntb_scaled="true"
+        app:ntb_tinted="true"
+        app:ntb_title_mode="all"
+        app:ntb_titled="true"
+        app:ntb_swiped="true"
+
+        />
+
+    <View
+        android:id="@+id/tab_line"
+        android:layout_above="@id/ntb_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorPrimaryDark"/>
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_horizontal_ntb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tab_line"
+        android:layout_below="@id/banner" />
+
+</RelativeLayout>

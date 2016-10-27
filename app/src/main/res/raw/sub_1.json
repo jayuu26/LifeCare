@@ -1,0 +1,88 @@
+{
+  "category": "subCategory",
+  "name": "Doctors",
+  "id": 1,
+  "type": "List",
+  "subCategory": [
+    {
+      "id": 1,
+      "name": "Physiotherapist",
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png"
+    },
+    {
+      "id": 2,
+      "name": "Pediatrician",
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png"
+    },
+    {
+      "id": 3,
+      "name": "Urologist",
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png"
+    },
+    {
+      "id": 4,
+      "name": "Orthopedist",
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png"
+    },
+    {
+      "id": 5,
+      "name": "Opthalmologist",
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png"
+    },
+    {
+      "id": 6,
+      "name": "Dietitian/Nutritionist",
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png"
+    },
+    {
+      "id": 7,
+      "name": "Dentist",
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png"
+    },
+    {
+      "id": 8,
+      "name": "Gynecologist/Obstertrician",
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png"
+    },
+    {
+      "id": 9,
+      "name": "Dermatologist",
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png"
+    },
+    {
+      "id": 10,
+      "name": "Homeopath",
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png"
+    },
+    {
+      "id": 11,
+      "name": "Ayurveda",
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png"
+    },
+    {
+      "id": 12,
+      "name": "Cardiologist",
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png"
+    },
+    {
+      "id": 13,
+      "name": "Gastroenterologist",
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png"
+    },
+    {
+      "id": 14,
+      "name": "Neurologist",
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png"
+    },
+    {
+      "id": 15,
+      "name": "ENT",
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png"
+    },
+    {
+      "id": 16,
+      "name": "General Physician",
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/medical-services-set-4/256/Male_Doctor-128.png"
+    }
+  ]
+}
