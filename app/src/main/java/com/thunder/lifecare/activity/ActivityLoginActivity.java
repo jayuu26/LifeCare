@@ -26,7 +26,6 @@ public class ActivityLoginActivity extends Activity implements View.OnClickListe
     private TextView tvErrorMsgPassword;
     private Context mContext;
     private  String uName,uPassword,domain="xyz";
-    int local_var = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
