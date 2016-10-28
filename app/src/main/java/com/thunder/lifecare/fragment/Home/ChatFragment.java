@@ -51,9 +51,7 @@ public class ChatFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mainView = (ViewGroup) inflater.inflate(R.layout.chat_fragment, container, false);
-        AppUtills.setActionBarTitle("Chat","", ((AppCompatActivity) getActivity()).getSupportActionBar(), getActivity(), false);
-
+        mainView = (ViewGroup) inflater.inflate(R.layout.post_wall_row_layout, container, false);
         return mainView;
     }
 

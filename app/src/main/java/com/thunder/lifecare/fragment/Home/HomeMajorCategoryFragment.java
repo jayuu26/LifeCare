@@ -90,16 +90,10 @@ public class HomeMajorCategoryFragment extends Fragment implements HomeListGridA
 
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         myRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
-
         lLayout = new GridLayoutManager(getActivity(), 2);
-
         myRecyclerView.setHasFixedSize(true);
         myRecyclerView.setLayoutManager(lLayout);
-
         loadList();
-
-//        HomeListGridAdapter rcAdapter = new HomeListGridAdapter(mContext, this,homeCategoriesList);
-//        myRecyclerView.setAdapter(rcAdapter);
     }
 
     @Override
@@ -113,10 +107,9 @@ public class HomeMajorCategoryFragment extends Fragment implements HomeListGridA
 
     private void loadList() {
 
-//        final ProgressDialog dialog = AppUtills.showProgressDialog(getActivity());
-//        RestCall service = RestClient.Single.INSTANCE.getInstance().getRestCallsConnection(mContext);
-        final Type listType = new TypeToken<List<HomeCategory>>() {
-        }.getType();
+        final ProgressDialog dialog = AppUtills.showProgressDialog(getActivity());
+        RestCall service = RestClient.Single.INSTANCE.getInstance().getRestCallsConnection(mContext);
+        final Type listType = new TypeToken<List<HomeCategory>>() {}.getType();
 
         HomeRootObject homeRootObject = null;
         homeRootObject = HomeRootObjectDBHelper.single.INSTANCE.getInstnce(getActivity()).getItemObject();
@@ -142,67 +135,7 @@ public class HomeMajorCategoryFragment extends Fragment implements HomeListGridA
         HomeListGridAdapter rcAdapter = new HomeListGridAdapter(mContext,this,homeCategoriesList);
                                 myRecyclerView.setAdapter(rcAdapter);
 
-//        AppUtills.hideProgressDialog(dialog);
-//
-
-//        if (AppUtills.isNetworkAvailable(mContext)) {
-//            final ProgressDialog dialog = AppUtills.showProgressDialog(getActivity());
-//            final Call<HomeRootObject> respo = service.getMainCategoryByUserId(userId);
-//            respo.enqueue(new Callback<HomeRootObject>() {
-//                @Override
-//                public void onResponse(Call<HomeRootObject> call, Response<HomeRootObject> response) {
-//                }
-//                @Override
-//                public void onFailure(Call<HomeRootObject> call, Throwable t) {
-//                }
-//            });
-
-
-
-
-//            repos.enqueue(new Callback<ResponseBody>() {
-//                @Override
-//                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//
-//                    if (response.code() == HttpURLConnection.HTTP_OK) {
-//                        try {
-//                            homeCategoriesList.removeAll(homeCategoriesList);
-//                            String json = "";
-//                            if (response != null) json = response.body().string();
-//                            System.out.println("onResponse " + json);
-//
-//                            if (json.contains("errorMsg")) {
-//                                try {
-//                                    ErrorModel errorModel = new ErrorModel();
-//                                    errorModel = new Gson().fromJson(json, ErrorModel.class);
-//                                    AppUtills.showErrorPopUp(getActivity(), errorModel.getErrorMsg());
-//                                } catch (JsonSyntaxException e) {
-//                                    e.printStackTrace();
-//                                    Toast.makeText(mContext, "" + MessageConstant.GENERIC_ERROR, Toast.LENGTH_SHORT).show();
-//                                }
-//                            } else {
-//                                List<HomeRootObject> homeRootObjects = new Gson().fromJson(json, listType);
-//                                homeCategoriesList.addAll((ArrayList)homeRootObjects);
-//                                HomeListGridAdapter rcAdapter = new HomeListGridAdapter(mContext,this,homeCategoriesList);
-//                                myRecyclerView.setAdapter(rcAdapter);
-//                            }
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                            Toast.makeText(mContext, "" + MessageConstant.GENERIC_ERROR, Toast.LENGTH_SHORT).show();
-//                        }
-//                    } else {
-//                        Toast.makeText(getActivity(), MessageConstant.GENERIC_ERROR, Toast.LENGTH_LONG).show();
-//                    }
-//                    AppUtills.cancelProgressDialog(dialog);
-//                }
-//
-//                @Override
-//                public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                    AppUtills.cancelProgressDialog(dialog);
-//                    Toast.makeText(getActivity(), MessageConstant.GENERIC_ERROR, Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//        }
+        AppUtills.hideProgressDialog(dialog);
     }
 
     private void loadSubCategory(int id) {

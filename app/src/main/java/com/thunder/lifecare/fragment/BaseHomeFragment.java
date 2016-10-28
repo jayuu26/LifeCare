@@ -24,6 +24,7 @@ import com.thunder.lifecare.fragment.Home.HomeMajorCategoryFragment;
 import com.thunder.lifecare.fragment.Home.OrderFragment;
 import com.thunder.lifecare.fragment.Home.TipsFragment;
 import com.thunder.lifecare.fragment.Home.MyReportsFragment;
+import com.thunder.lifecare.fragment.Home.WallPost.WallPostHomeFragment;
 import com.thunder.lifecare.fragment.Location.GoogleMapFragment;
 import com.thunder.lifecare.service.LocationService;
 import com.thunder.lifecare.util.AppLog;
@@ -174,7 +175,7 @@ public class BaseHomeFragment extends Fragment {
                         HomeMajorCategoryFragment.Single.INSTANCE.getInstance().onPageSelected(position);
                         break;
                     case 1:
-                        ChatFragment.Single.INSTANCE.getInstance().onPageSelected(position);
+                        WallPostHomeFragment.Single.INSTANCE.getInstance().onPageSelected(position);
                         break;
                     case 2:
                         MyReportsFragment.Single.INSTANCE.getInstance().onPageSelected(position);
@@ -221,7 +222,7 @@ public class BaseHomeFragment extends Fragment {
             switch(pos) {
 
                 case 0: return HomeMajorCategoryFragment.Single.INSTANCE.getInstance();
-                case 1: return ChatFragment.Single.INSTANCE.getInstance();
+                case 1: return WallPostHomeFragment.Single.INSTANCE.getInstance();
                 case 2: return MyReportsFragment.Single.INSTANCE.getInstance();
                 case 3: return TipsFragment.Single.INSTANCE.getInstance();
                 case 4: return OrderFragment.Single.INSTANCE.getInstance();
