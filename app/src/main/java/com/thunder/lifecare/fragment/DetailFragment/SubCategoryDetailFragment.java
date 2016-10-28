@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
@@ -26,7 +27,7 @@ import com.thunder.lifecare.R;
 /**
  * Created by ist-150 on 27/10/16.
  */
-public class SubCategoryDetailFragment extends Fragment {
+public class SubCategoryDetailFragment extends Fragment implements AppBarLayout.OnOffsetChangedListener {
 
     private View mainView;
     private CoordinatorLayout detailsLayout;
@@ -37,13 +38,15 @@ public class SubCategoryDetailFragment extends Fragment {
     private LinearLayout dotsLayout;
     private TextView[] dots;
     private int[] images = new int[]{
-                R.drawable.chat_three,
-                R.drawable.diagnosis,
-                R.drawable.doctor_one,
-                R.drawable.doctors,
-                R.drawable.find,
-                R.drawable.hospital,};
+            R.drawable.chat_three,
+            R.drawable.diagnosis,
+            R.drawable.doctor_one,
+            R.drawable.doctors,
+            R.drawable.find,
+            R.drawable.hospital,};
     private int position = images.length;
+//    private Runnable runnable;
+    private Handler handler = new Handler();
 
     public enum Single {
         INSTANCE;
@@ -59,7 +62,7 @@ public class SubCategoryDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mainView = (ViewGroup)inflater.inflate(R.layout.subcategory_detail_layout, container, false);
+        mainView = (ViewGroup) inflater.inflate(R.layout.subcategory_detail_layout, container, false);
         initView(mainView);
         return mainView;
     }
@@ -69,23 +72,22 @@ public class SubCategoryDetailFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private Handler handler = new Handler();
     private Runnable runnable = new Runnable() {
         public void run() {
-            if( position >= 4){
+            if( position >= 5){
                 position = 0;
             }else{
                 position = position+1;
             }
             viewPager.setCurrentItem(position, true);
-            handler.postDelayed(runnable, 2000);
+//            handler.postDelayed(runnable, 2000);
         }
     };
 
     @Override
     public void onPause() {
         super.onPause();
-        if (handler!= null) {
+        if (handler != null) {
             handler.removeCallbacks(runnable);
         }
     }
@@ -96,10 +98,27 @@ public class SubCategoryDetailFragment extends Fragment {
         handler.postDelayed(runnable, 2000);
     }
 
+    @Override
+    public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+        System.out.println("vertical offset : " + verticalOffset) ;
+        if (verticalOffset == 0) {
+            // Collapsed
+            handler.postDelayed(runnable, 2000);
+        } else {
+            // Not collapsed
+            if (handler != null) {
+                handler.removeCallbacks(runnable);
+            }
+        }
+    }
+
     private void initView(View mainView) {
         detailsLayout = (CoordinatorLayout) mainView.findViewById(R.id.details_layout);
         collapsingToolbarLayout = (CollapsingToolbarLayout) mainView.findViewById(R.id.collapsing_toolbar);
         toolbar = (Toolbar) mainView.findViewById(R.id.action_toolbar);
+
+        AppBarLayout appBarLayout = (AppBarLayout) mainView.findViewById(R.id.app_bar_layout);
+        appBarLayout.addOnOffsetChangedListener(this);
 
         collapsingToolbarLayout.setTitle("Dr. M K Rathore");
 
