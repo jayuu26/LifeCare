@@ -1,0 +1,91 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/page_bg_color">
+
+    <RelativeLayout
+        android:id="@+id/top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/page_bg_color"
+
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/add_post_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="5dp"
+            android:drawableEnd="@drawable/ic_add_circle_green_dark_24dp"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:text="Add Post"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            android:paddingTop="5dp">
+
+            <View
+                android:layout_width="1dp"
+                android:visibility="visible"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:background="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/post_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="Count : 50"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/post_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:background="@color/colorPrimary"
+                android:drawableRight="@drawable/quantum_ic_keyboard_arrow_down_white_36"
+                android:gravity="center"
+                android:minWidth="120dp"
+                android:paddingLeft="5dp"
+                android:text="All"
+                android:textColor="@color/text_color_white"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/top_layout"
+        android:background="@color/gray_bg" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/wall_post_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/top_layout"
+        android:layout_centerInParent="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>
