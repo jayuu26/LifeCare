@@ -13,12 +13,15 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 import com.thunder.lifecare.GreenDao.daomodel.Category;
 import com.thunder.lifecare.R;
 import com.thunder.lifecare.adapter.WallAdapter.PostWallAdapter;
-import com.thunder.lifecare.fragment.SubCategory.Doctor.SubCategoryFragment;
+import com.thunder.lifecare.customlayout.ContextMenu;
 import com.thunder.lifecare.util.AppLog;
 import com.thunder.lifecare.util.AppUtills;
+import com.yalantis.contextmenu.lib.interfaces.OnMenuItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +29,12 @@ import java.util.List;
 /**
  * Created by ist-150 on 15/10/16.
  */
-public class WallPostHomeFragment extends Fragment implements PostWallAdapter.WallPostActionListener, View.OnClickListener {
+public class WallPostHomeFragment extends Fragment implements PostWallAdapter.WallPostActionListener, View.OnClickListener, OnMenuItemClickListener {
 
     private String TAG = "WallPostHomeFragment";
     private View mainView;
+    FloatingActionMenu materialDesignFAM;
+    FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3;
 
     private Context mContext;
     private RelativeLayout topLayout;
@@ -39,6 +44,9 @@ public class WallPostHomeFragment extends Fragment implements PostWallAdapter.Wa
 
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
+
+
+    private ContextMenu contextMenu;
 
     public enum Single {
         INSTANCE;
@@ -73,10 +81,26 @@ public class WallPostHomeFragment extends Fragment implements PostWallAdapter.Wa
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = (ViewGroup) inflater.inflate(R.layout.post_wall_main_layout, container, false);
         mContext =getActivity();
+        initView(mainView);
         return mainView;
     }
 
+    private void initView(View view){
 
+        materialDesignFAM = (FloatingActionMenu) view.findViewById(R.id.material_design_android_floating_action_menu);
+        floatingActionButton1 = (FloatingActionButton) view.findViewById(R.id.material_design_floating_action_menu_item1);
+        floatingActionButton2 = (FloatingActionButton) view.findViewById(R.id.material_design_floating_action_menu_item2);
+        floatingActionButton3 = (FloatingActionButton) view.findViewById(R.id.material_design_floating_action_menu_item3);
+
+        floatingActionButton1.setColorNormalResId(R.color.colorPrimary);
+        floatingActionButton2.setColorNormalResId(R.color.colorPrimary);
+        floatingActionButton3.setColorNormalResId(R.color.colorPrimary);
+    }
+
+    @Override
+    public void onMenuItemClick(View clickedView, int position) {
+
+    }
 
     private void loadPostList() {
 
@@ -116,9 +140,7 @@ public class WallPostHomeFragment extends Fragment implements PostWallAdapter.Wa
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.add_post_view:
-
                 AppUtills.loadFragment(AddWallPostFragment.Single.INSTANCE.getInstance(), getActivity(), R.id.container);
-
                 break;
         }
     }

@@ -22,12 +22,12 @@ public class ReportViewAdapter extends RecyclerView.Adapter<ReportViewAdapter.Cu
     private List<Category> categoryList;
     private Context context;
     private Long inventoryId;
-    private CategoryActionListener actionListener;
+    private ReportActionListener actionListener;
 
-    public ReportViewAdapter(Context context, List<Category> categoryList, CategoryActionListener categoryActionListener) {
+    public ReportViewAdapter(Context context, List<Category> categoryList, ReportActionListener reportActionListener) {
         this.categoryList = categoryList;
         this.context = context;
-        this.actionListener = categoryActionListener;
+        this.actionListener = reportActionListener;
     }
 
     @Override
@@ -40,15 +40,15 @@ public class ReportViewAdapter extends RecyclerView.Adapter<ReportViewAdapter.Cu
 
     @Override
     public void onBindViewHolder(final ReportViewAdapter.CustomViewHolder holder, int position) {
-        final Category category = categoryList.get(position);
-        holder.txtCategoryName.setText(category.getCategoryName());
-        holder.txtCategoryIcon.setImageResource(category.getCategoryImage());
+//        final Category category = categoryList.get(position);
+//        holder.txtCategoryName.setText(category.getCategoryName());
+//        holder.txtCategoryIcon.setImageResource(category.getCategoryImage());
 //        holder.issueRowItem.setTag(position);
     }
 
     @Override
     public int getItemCount() {
-        return (null != categoryList ? categoryList.size() : 0);
+        return 10;//(null != categoryList ? categoryList.size() : 0);
     }
 
     public class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
@@ -69,12 +69,12 @@ public class ReportViewAdapter extends RecyclerView.Adapter<ReportViewAdapter.Cu
         public void onClick(View v) {
             Toast.makeText(v.getContext(), "Clicked category Position = " + getPosition(), Toast.LENGTH_SHORT).show();
 //            int position = (Integer) v.getTag();
-            Category category = categoryList.get(getPosition());
-            actionListener.OnCategoryClick(category);
+//            Category category = categoryList.get(getPosition());
+            actionListener.onReportClick(null);
         }
     }
 
-    public interface CategoryActionListener{
-        public void OnCategoryClick(Category category);
+    public interface ReportActionListener {
+        void onReportClick(Category category);
     }
 }

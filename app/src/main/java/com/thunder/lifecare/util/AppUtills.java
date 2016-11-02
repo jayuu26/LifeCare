@@ -271,6 +271,22 @@ public class AppUtills {
 
     private static final int REQUEST_WRITE_STORAGE = 112;
 
+//    public void writeFile(){
+//
+//        try {
+//            File sd = Environment.getExternalStorageDirectory();
+//            String myAPK = "myFile.apk";
+//            File backupDB = new File(sd, myAPK);
+//
+//            FileChannel dst = new FileOutputStream(backupDB).getChannel();
+//            dst.transferFrom(src, 0, src.size());
+////            src.close();
+//            dst.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
     public static void exportDatabase(Context context,Activity activity) {
         try {
             boolean hasPermission = (ContextCompat.checkSelfPermission(context,

@@ -11,13 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.thunder.lifecare.GreenDao.daomodel.Category;
 import com.thunder.lifecare.R;
+import com.thunder.lifecare.adapter.ReportViewAdapter;
 import com.thunder.lifecare.util.AppUtills;
 
 /**
  * Created by ist-150 on 15/10/16.
  */
-public class ReportsFragment extends Fragment {
+public class ReportsFragment extends Fragment implements ReportViewAdapter.ReportActionListener {
 
     private View mainView;
     private RecyclerView my_reports_recycler_view;
@@ -41,7 +43,6 @@ public class ReportsFragment extends Fragment {
         mContext = getActivity();
 
         mainView = (ViewGroup)inflater.inflate(R.layout.reports_layout, container, false);
-//        AppUtills.setActionBarTitle("My Reports","", ((AppCompatActivity) getActivity()).getSupportActionBar(), getActivity(), true);
 
         initView(mainView);
 
@@ -56,8 +57,12 @@ public class ReportsFragment extends Fragment {
         my_reports_recycler_view.setHasFixedSize(true);
         my_reports_recycler_view.setLayoutManager(lLayout);
 
-//        ReportViewAdapter rcAdapter = new ReportViewAdapter(mContext, null, this);
-//        my_reports_recycler_view.setAdapter(rcAdapter);
+        ReportViewAdapter rcAdapter = new ReportViewAdapter(mContext, null, this);
+        my_reports_recycler_view.setAdapter(rcAdapter);
     }
 
+    @Override
+    public void onReportClick(Category category) {
+
+    }
 }

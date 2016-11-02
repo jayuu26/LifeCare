@@ -165,4 +165,15 @@
         <item>Sports Clubs</item>
     </string-array>
 
+
+    <string-array name="option_menu">
+        <item>Close</item>
+        <item>My Profile</item>
+        <item>Share</item>
+        <item>About Us</item>
+        <item>Help</item>
+        <item>Update</item>
+        <item>Exit</item>
+    </string-array>
+
 </resources>

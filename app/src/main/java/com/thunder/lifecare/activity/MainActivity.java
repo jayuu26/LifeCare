@@ -3,6 +3,7 @@ package com.thunder.lifecare.activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,20 +14,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.thunder.lifecare.R;
 import com.thunder.lifecare.constant.CollectionObject;
+import com.thunder.lifecare.customlayout.ContextMenu;
 import com.thunder.lifecare.customlayout.SlidingTabLayout;
 import com.thunder.lifecare.fragment.BaseHomeFragment;
 import com.thunder.lifecare.fragment.Location.GoogleMapFragment;
 import com.thunder.lifecare.fragment.Registration.MobileLoginFragment;
 import com.thunder.lifecare.util.AppUtills;
 import com.thunder.lifecare.util.PreferenceHelper;
+import com.yalantis.contextmenu.lib.ContextMenuDialogFragment;
+import com.yalantis.contextmenu.lib.interfaces.OnMenuItemClickListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnMenuItemClickListener, View.OnClickListener {
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -36,8 +41,12 @@ public class MainActivity extends AppCompatActivity
     public static MenuItem searchMenuItem;
     public static ActionBar actionBar;
     Context mcontext;
+    FragmentActivity fragmentActivity;
     CircleImageView userProfileImage;
     PreferenceHelper preferenceHelper;
+    private ContextMenuDialogFragment mMenuDialogFragment;
+    private ContextMenu contextMenu;
+    private ImageView menu_option, location_option;
 
 
     @Override
@@ -45,20 +54,42 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_layout);
         mcontext = this;
-        preferenceHelper =new PreferenceHelper(mcontext);
+        fragmentActivity = this;
+        preferenceHelper = new PreferenceHelper(mcontext);
         initActionBar();
-       if(preferenceHelper.isFirstTimeLaunch()){
-           AppUtills.loadFragment(BaseHomeFragment.Single.INSTANCE.getInstance(), this, R.id.container);
-       }else {
-           AppUtills.initCountyList(AppUtills.loadJsonFromAssets(this, "isocountry"));
-           AppUtills.loadFragment(MobileLoginFragment.Single.INSTANCE.getInstance(), this, R.id.container);
-       }
+        if (preferenceHelper.isFirstTimeLaunch()) {
+            AppUtills.loadFragment(BaseHomeFragment.Single.INSTANCE.getInstance(), this, R.id.container);
+        } else {
+            AppUtills.initCountyList(AppUtills.loadJsonFromAssets(this, "isocountry"));
+            AppUtills.loadFragment(MobileLoginFragment.Single.INSTANCE.getInstance(), this, R.id.container);
+        }
     }
 
 
     private void initActionBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.action_toolbar);
         setSupportActionBar(toolbar);
+
+        contextMenu = new ContextMenu(mcontext, this);
+        mMenuDialogFragment = contextMenu.initMenuFragment();
+        menu_option = (ImageView) findViewById(R.id.menu_option);
+        location_option = (ImageView) findViewById(R.id.location_option);
+
+        location_option.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppUtills.loadFragment(GoogleMapFragment.Single.INSTANCE.getInstance(), fragmentActivity, R.id.container);
+            }
+        });
+
+
+        menu_option.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mMenuDialogFragment.show(getSupportFragmentManager(), ContextMenuDialogFragment.TAG);
+            }
+        });
 
        /* DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -80,11 +111,11 @@ public class MainActivity extends AppCompatActivity
             userProfileImage.setImageResource(R.drawable.avatar);
         */
         actionBar = getSupportActionBar();
-        AppUtills.setActionBarTitle("Home", CollectionObject.LOCATION_ADDRESS,actionBar,this,false);
+        AppUtills.setActionBarTitle("Home", CollectionObject.LOCATION_ADDRESS, actionBar, this, false);
     }
 
     private void initSearch(Menu menu) {
-        searchMenuItem = menu.findItem(R.id.action_search);
+     /*   searchMenuItem = menu.findItem(R.id.action_search);
 
         searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
         searchView.setBackgroundResource(0);
@@ -107,7 +138,7 @@ public class MainActivity extends AppCompatActivity
                 return false;
             }
         });
-
+*/
     }
 
     @Override
@@ -118,7 +149,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.option_menu, menu);
+//        getMenuInflater().inflate(R.menu.option_menu, menu);
 //        initSearch(menu);
         return true;
     }
@@ -132,11 +163,28 @@ public class MainActivity extends AppCompatActivity
             case android.R.id.home:
                 super.onBackPressed();
                 return true;
-            case R.id.action_search:
-                AppUtills.loadFragment(GoogleMapFragment.Single.INSTANCE.getInstance(), this, R.id.container);
-                return true;
+//            case R.id.action_search:
+//                AppUtills.loadFragment(GoogleMapFragment.Single.INSTANCE.getInstance(), this, R.id.container);
+//                return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onMenuItemClick(View clickedView, int position) {
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.location_option:
+                AppUtills.loadFragment(GoogleMapFragment.Single.INSTANCE.getInstance(), this, R.id.container);
+                break;
+            case R.id.menu_option:
+                mMenuDialogFragment.show(getSupportFragmentManager(), ContextMenuDialogFragment.TAG);
+                break;
+        }
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

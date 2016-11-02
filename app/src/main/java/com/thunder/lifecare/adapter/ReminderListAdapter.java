@@ -41,16 +41,16 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
 
     @Override
     public void onBindViewHolder(final ReminderListAdapter.CustomViewHolder holder, int position) {
-        final Category category = categoryList.get(position);
-        holder.txtMedicineName.setText(category.getCategoryName());
-        holder.txtMedicineDose.setText("");
-        holder.txtMedicineImg.setImageResource(category.getCategoryImage());
+//        final Category category = categoryList.get(position);
+//        holder.txtMedicineName.setText(category.getCategoryName());
+//        holder.txtMedicineDose.setText("");
+//        holder.txtMedicineImg.setImageResource(category.getCategoryImage());
 //        holder.issueRowItem.setTag(position);
     }
 
     @Override
     public int getItemCount() {
-        return (null != categoryList ? categoryList.size() : 0);
+        return 10;// (null != categoryList ? categoryList.size() : 0);
     }
 
     public class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
@@ -71,8 +71,8 @@ public class ReminderListAdapter extends RecyclerView.Adapter<ReminderListAdapte
         public void onClick(View v) {
             Toast.makeText(v.getContext(), "Clicked category Position = " + getPosition(), Toast.LENGTH_SHORT).show();
 //            int position = (Integer) v.getTag();
-            Category category = categoryList.get(getPosition());
-           actionListener.OnReminderClick(category);
+//            Category category = categoryList.get(getPosition());
+//           actionListener.OnReminderClick(category);
         }
     }
 

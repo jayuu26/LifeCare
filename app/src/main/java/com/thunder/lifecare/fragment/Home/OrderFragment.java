@@ -49,7 +49,7 @@ public class OrderFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mainView = (ViewGroup)inflater.inflate(R.layout.search_layout_frag, container, false);
+        mainView = (ViewGroup)inflater.inflate(R.layout.under_construction, container, false);
         return  mainView;
     }
 

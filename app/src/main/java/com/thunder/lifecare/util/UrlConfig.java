@@ -11,4 +11,6 @@ public interface UrlConfig {
 
     String GET_FAMA_LOCATION = "rest/BankDetail/findAll/";//GET
 
+    String HEALTH_TIPS_URL = "http://www.myhealthtips.in/";
+
 }

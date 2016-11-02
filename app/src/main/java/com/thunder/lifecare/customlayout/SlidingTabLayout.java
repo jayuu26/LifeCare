@@ -2,6 +2,7 @@ package com.thunder.lifecare.customlayout;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -138,7 +139,8 @@ public class SlidingTabLayout extends HorizontalScrollView {
      */
     public void setViewPager(ViewPager viewPager) {
         mTabStrip.removeAllViews();
-
+        int[] myColorArray = {Color.parseColor("#FFA72A")};
+        mTabStrip.setSelectedIndicatorColors(myColorArray);
         mViewPager = viewPager;
         if (viewPager != null) {
             viewPager.setOnPageChangeListener(new InternalViewPagerListener());

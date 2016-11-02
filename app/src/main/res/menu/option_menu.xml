@@ -2,41 +2,41 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/action_search"
-        android:icon="@drawable/ic_my_location_white_24dp"
-        android:title="Search"
-        android:iconifiedByDefault="false"
-        app:showAsAction="always"
-         />
+    <!--<item-->
+        <!--android:id="@+id/action_search"-->
+        <!--android:icon="@drawable/ic_my_location_white_24dp"-->
+        <!--android:title="Search"-->
+        <!--android:iconifiedByDefault="false"-->
+        <!--app:showAsAction="always"-->
+         <!--/>-->
 
-    <item
-        android:id="@+id/action_my_profile"
-        android:title="My Profile"
-        android:visible="true"
-        />
+    <!--<item-->
+        <!--android:id="@+id/action_my_profile"-->
+        <!--android:title="My Profile"-->
+        <!--android:visible="true"-->
+        <!--/>-->
 
-    <item
-        android:id="@+id/action_share"
-        android:title="Share"
-        android:visible="true" />
+    <!--<item-->
+        <!--android:id="@+id/action_share"-->
+        <!--android:title="Share"-->
+        <!--android:visible="true" />-->
 
-    <item
-        android:id="@+id/action_about"
-        android:title="ABout Us"
-        android:visible="true" />
-    <item
-        android:id="@+id/action_help"
-        android:title="Help"
-        android:visible="true" />
-    <item
-        android:id="@+id/action_version"
-        android:title="Version"
-        android:visible="true" />
+    <!--<item-->
+        <!--android:id="@+id/action_about"-->
+        <!--android:title="ABout Us"-->
+        <!--android:visible="true" />-->
+    <!--<item-->
+        <!--android:id="@+id/action_help"-->
+        <!--android:title="Help"-->
+        <!--android:visible="true" />-->
+    <!--<item-->
+        <!--android:id="@+id/action_version"-->
+        <!--android:title="Version"-->
+        <!--android:visible="true" />-->
 
-    <item
-        android:id="@+id/action_exit"
-        android:title="Exit"
-        android:visible="true" />
+    <!--<item-->
+        <!--android:id="@+id/action_exit"-->
+        <!--android:title="Exit"-->
+        <!--android:visible="true" />-->
 
 </menu>

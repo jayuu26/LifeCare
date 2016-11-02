@@ -17,15 +17,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.thunder.lifecare.GreenDao.daomodel.Category;
 import com.thunder.lifecare.R;
+import com.thunder.lifecare.adapter.ReminderListAdapter;
 import com.thunder.lifecare.util.AppUtills;
 
 /**
  * Created by ist-150 on 15/10/16.
  */
-public class ReminderFragment extends Fragment {
+public class ReminderFragment extends Fragment implements ReminderListAdapter.ReminderActionListener {
 
     private View mainView;
+    private ReminderListAdapter reminderListAdapter;
     private RecyclerView my_reports_recycler_view;
     private LinearLayoutManager lLayout;
     private Context mContext;
@@ -47,8 +50,6 @@ public class ReminderFragment extends Fragment {
         mContext = getActivity();
 
         mainView = (ViewGroup)inflater.inflate(R.layout.reminder_layout, container, false);
-//        AppUtills.setActionBarTitle("Reminder","", ((AppCompatActivity) getActivity()).getSupportActionBar(), getActivity(), true);
-
         initView(mainView);
 
         return  mainView;
@@ -56,14 +57,20 @@ public class ReminderFragment extends Fragment {
 
     private void initView(View mainView) {
 
+
         my_reports_recycler_view = (RecyclerView) mainView.findViewById(R.id.reminder_recycler_view);
 
         lLayout = new LinearLayoutManager(mContext);
         my_reports_recycler_view.setHasFixedSize(true);
         my_reports_recycler_view.setLayoutManager(lLayout);
 
-//        ReportViewAdapter rcAdapter = new ReportViewAdapter(mContext, null, this);
-//        my_reports_recycler_view.setAdapter(rcAdapter);
+        reminderListAdapter = new ReminderListAdapter(mContext, null, this);
+        my_reports_recycler_view.setAdapter(reminderListAdapter);
     }
 
+
+    @Override
+    public void OnReminderClick(Category category) {
+
+    }
 }

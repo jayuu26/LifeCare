@@ -81,6 +81,7 @@ public class HomeMajorCategoryFragment extends Fragment implements HomeListGridA
         mContext = getActivity();
         ViewGroup mainView = (ViewGroup) inflater.inflate(R.layout.search_layout_frag, container, false);
         service = RestClient.Single.INSTANCE.getInstance().getRestCallsConnection(mContext);
+
         return mainView;
     }
 
