@@ -656,9 +656,7 @@ public class AppUtills {
     public static boolean checkPermission(Activity activity,Context mContext, int PERMISSION_REQUEST_CODE, String permission){
         int result = ContextCompat.checkSelfPermission(mContext, permission);
         if (result == PackageManager.PERMISSION_GRANTED){
-
             return true;
-
         } else {
             return requestPermission(activity,mContext,PERMISSION_REQUEST_CODE,permission);
         }
@@ -667,12 +665,10 @@ public class AppUtills {
     public static boolean requestPermission(Activity activity,Context mContext, int PERMISSION_REQUEST_CODE,String permission){
 
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity,permission)){
-
             Toast.makeText(mContext,permission+" Allowed.",Toast.LENGTH_LONG).show();
             return true;
         } else {
-
-            ActivityCompat.requestPermissions(activity,new String[]{Manifest.permission.READ_SMS},PERMISSION_REQUEST_CODE);
+            ActivityCompat.requestPermissions(activity,new String[]{""+permission/*Manifest.permission.ACCESS_FINE_LOCATION*/},PERMISSION_REQUEST_CODE);
             return false;
         }
     }

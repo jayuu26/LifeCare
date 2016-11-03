@@ -47,7 +47,8 @@ import java.util.List;
 
 public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, LocationListener {
 
-    final int PERMISSION_REQUEST_CODE = 123456;
+    final int PERMISSION_REQUEST_CODE = 1;
+    final int PERMISSION_REQUEST_CODE1 = 2;
 
     private Context mContext;
     private LocationManager locationManager;
@@ -92,6 +93,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, L
             mContext = getActivity();
             AppUtills.setActionBarTitle("Select Location "," Location Address", ((AppCompatActivity) getActivity()).getSupportActionBar(), getActivity(), true);
 
+            AppUtills.checkPermission(getActivity(), mContext, PERMISSION_REQUEST_CODE, Manifest.permission.ACCESS_FINE_LOCATION);
             initView();
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -104,8 +106,8 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, L
         SupportMapFragment mapFrag = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.googleMap);
         mapFrag.getMapAsync(this);
         myLocationButton();
-        if (AppUtills.checkPermission(getActivity(), mContext, PERMISSION_REQUEST_CODE, Manifest.permission.ACCESS_FINE_LOCATION))
-            mGoogleMap.setMyLocationEnabled(true);
+//        AppUtills.checkPermission(getActivity(), mContext, PERMISSION_REQUEST_CODE, Manifest.permission.ACCESS_FINE_LOCATION);
+//        mGoogleMap.setMyLocationEnabled(true);
         locationTxt = (EditText) mainView.findViewById(R.id.findLocationText);
         ImageView search_button = (ImageView) mainView.findViewById(R.id.search_icon);
         search_button.setOnClickListener(new View.OnClickListener() {
@@ -253,7 +255,6 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, L
     public void onResume() {
         // TODO Auto-generated method stub
         location = getLocation();
-
         super.onResume();
     }
 
