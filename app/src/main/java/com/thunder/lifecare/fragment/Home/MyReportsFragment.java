@@ -67,30 +67,19 @@ public class MyReportsFragment extends Fragment implements View.OnClickListener{
     private View mainView;
     private ViewPager viewPager;
     private SlidingTabLayout tabLayout;
-//    private FloatingActionButton fab_button;
-//    private FloatingActionButton fab1, fab2, fab3;
     private ImageView down_button;
     private Context mContext;
-    private Animation show_fab_1, hide_fab_1;
-    private Animation show_fab_2, hide_fab_2;
-    private Animation show_fab_3, hide_fab_3;
-    private Animation record_dialog_anim;
     private RelativeLayout record_dialog;
-    private FrameLayout record_frame;
+    private FrameLayout mInterceptorFrame;
     private ImageView open_camera, open_galley, upload_file;
     private ArrayList<String> docPaths = new ArrayList<>();
     private static final int PICK_Camera_IMAGE = 2;
     public static final int REQUEST_GALLERY_PHOTO = 0x479;
     private File destination;
 
+    RelativeLayout floatButtonLayout;
     FloatingActionMenu materialDesignFAM;
     com.github.clans.fab.FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3;
-
-
-    //Save the FAB's active status
-    //false -> fab = close
-    //true -> fab = open
-    private boolean FAB_Status = false;
 
     public enum Single {
         INSTANCE;
@@ -129,9 +118,9 @@ public class MyReportsFragment extends Fragment implements View.OnClickListener{
         return mainView;
     }
 
-
     private void initActionButtonView(View view){
 
+        floatButtonLayout = (RelativeLayout) view.findViewById(R.id.floating_layout);
         materialDesignFAM = (FloatingActionMenu) view.findViewById(R.id.material_design_android_floating_action_menu);
         floatingActionButton1 = (com.github.clans.fab.FloatingActionButton) view.findViewById(R.id.material_design_floating_action_menu_item1);
         floatingActionButton2 = (com.github.clans.fab.FloatingActionButton) view.findViewById(R.id.material_design_floating_action_menu_item2);
@@ -145,6 +134,7 @@ public class MyReportsFragment extends Fragment implements View.OnClickListener{
         floatingActionButton2.setOnClickListener(this);
         floatingActionButton3.setOnClickListener(this);
     }
+
     private void initView(View mainView) {
 
         viewPager = (ViewPager) mainView.findViewById(R.id.tabanim_viewpager);
@@ -154,43 +144,30 @@ public class MyReportsFragment extends Fragment implements View.OnClickListener{
 
         initActionButtonView(mainView);
 
-//        fab_button = (FloatingActionButton) mainView.findViewById(R.id.fab_add_reports);
-//        fab1 = (FloatingActionButton) mainView.findViewById(R.id.fab_1);
-//        fab2 = (FloatingActionButton) mainView.findViewById(R.id.fab_2);
-//        fab3 = (FloatingActionButton) mainView.findViewById(R.id.fab_3);
-
-        record_frame = (FrameLayout) mainView.findViewById(R.id.record_frame);
         record_dialog = (RelativeLayout) mainView.findViewById(R.id.record_dialog);
         down_button = (ImageView) mainView.findViewById(R.id.down_button);
         open_camera = (ImageView) mainView.findViewById(R.id.open_camera);
         open_galley = (ImageView) mainView.findViewById(R.id.open_galley);
         upload_file = (ImageView) mainView.findViewById(R.id.upload_file);
 
-        //Animations
-        record_dialog_anim = AnimationUtils.loadAnimation(getActivity(), R.anim.move);
-        show_fab_1 = AnimationUtils.loadAnimation(getActivity(), R.anim.fab1_show);
-        hide_fab_1 = AnimationUtils.loadAnimation(getActivity(), R.anim.fab1_hide);
-        show_fab_2 = AnimationUtils.loadAnimation(getActivity(), R.anim.fab2_show);
-        hide_fab_2 = AnimationUtils.loadAnimation(getActivity(), R.anim.fab2_hide);
-        show_fab_3 = AnimationUtils.loadAnimation(getActivity(), R.anim.fab3_show);
-        hide_fab_3 = AnimationUtils.loadAnimation(getActivity(), R.anim.fab3_hide);
-
-        record_frame.setOnTouchListener(new View.OnTouchListener() {
-
+        mInterceptorFrame = (FrameLayout) mainView.findViewById(R.id.fl_interceptor);
+        mInterceptorFrame.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                Log.d(TAG, "onTouch  " + "");
                 if (record_dialog.getVisibility() == View.VISIBLE) {
                     record_dialog.setVisibility(View.GONE);
+                    floatButtonLayout.setVisibility(View.VISIBLE);
 //                    fab_button.setVisibility(View.VISIBLE);
+                }
+
+                if (materialDesignFAM.isOpened()) {
+                    materialDesignFAM.close(true);
+                    return true;
                 }
                 return false;
             }
         });
-
-//        fab_button.setOnClickListener(this);
-//        fab1.setOnClickListener(this);
-//        fab2.setOnClickListener(this);
-//        fab3.setOnClickListener(this);
         down_button.setOnClickListener(this);
         open_camera.setOnClickListener(this);
         open_galley.setOnClickListener(this);
@@ -202,46 +179,26 @@ public class MyReportsFragment extends Fragment implements View.OnClickListener{
         switch (v.getId()) {
             case R.id.material_design_floating_action_menu_item1:
                 AppUtills.loadFragment(AddReminderFragment.Single.INSTANCE.getInstance(), getActivity(), R.id.container);
+                if (materialDesignFAM.isOpened()) {
+                    materialDesignFAM.close(true);
+                }
                 break;
             case R.id.material_design_floating_action_menu_item2:
                 record_dialog.setVisibility(View.VISIBLE);
-                break;
-
-//            case R.id.fab_add_reports:
-//                if (FAB_Status == false) {
-//                    //Display FAB menu
-//                    displayFloatingActionButton();
-//                    FAB_Status = true;
-//                } else {
-//                    //Close FAB menu
-//                    hideFloatingActionButton();
-//                    FAB_Status = false;
-//                }
-//                break;
-            case R.id.fab_1:
-                if (record_dialog.getVisibility() == View.GONE) {
-                    record_dialog.setVisibility(View.VISIBLE);
-//                    record_dialog.startAnimation(record_dialog_anim);
+                floatButtonLayout.setVisibility(View.GONE);
+                if (materialDesignFAM.isOpened()) {
+                    materialDesignFAM.close(true);
                 }
-                hideFloatingActionButton();
-                FAB_Status = false;
-//                fab_button.setVisibility(View.GONE);
-                break;
-            case R.id.fab_2:
-                AppUtills.loadFragment(AddReminderFragment.Single.INSTANCE.getInstance(), getActivity(), R.id.container);
-                break;
-            case R.id.fab_3:
-                Toast.makeText(getActivity(), "Under Construction", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.down_button:
                 if (record_dialog.getVisibility() == View.VISIBLE) {
                     record_dialog.setVisibility(View.GONE);
-//                    fab_button.setVisibility(View.VISIBLE);
+                    floatButtonLayout.setVisibility(View.VISIBLE);
                 }
                 break;
             case R.id.open_camera:
                 record_dialog.setVisibility(View.GONE);
-//                fab_button.setVisibility(View.VISIBLE);
+                floatButtonLayout.setVisibility(View.VISIBLE);
                 boolean hasCameraPermission = (ContextCompat.checkSelfPermission(getActivity(),
                         Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED);
                 if (!hasCameraPermission) {
@@ -254,6 +211,8 @@ public class MyReportsFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.open_galley:
                 onGalleryBtnClicked();
+                record_dialog.setVisibility(View.GONE);
+                floatButtonLayout.setVisibility(View.VISIBLE);
                 break;
             case R.id.upload_file:
                 boolean hasPermission = (ContextCompat.checkSelfPermission(getActivity(),
@@ -264,7 +223,7 @@ public class MyReportsFragment extends Fragment implements View.OnClickListener{
                             111);
                 } else {
                     record_dialog.setVisibility(View.GONE);
-//                    fab_button.setVisibility(View.VISIBLE);
+                    floatButtonLayout.setVisibility(View.VISIBLE);
                     FilePickerBuilder.getInstance().setMaxCount(1)
                             .setActivityTheme(R.style.AppThemeForFileSelector)
                             .pickDocument(this);
@@ -283,56 +242,6 @@ public class MyReportsFragment extends Fragment implements View.OnClickListener{
         adapter.addFrag(ReportsFragment.Single.INSTANCE.getInstance(), "Reports");
         adapter.addFrag(ReminderFragment.Single.INSTANCE.getInstance(), "Reminders");
         viewPager.setAdapter(adapter);
-    }
-
-    private void displayFloatingActionButton() {
-//        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) fab1.getLayoutParams();
-//        layoutParams.rightMargin += (int) (fab1.getWidth() * 1.7);
-//        layoutParams.bottomMargin += (int) (fab1.getHeight() * 0.25);
-//        fab1.setLayoutParams(layoutParams);
-//        fab1.startAnimation(show_fab_1);
-//        fab1.setClickable(true);
-//
-//        //Floating Action Button 2
-//        FrameLayout.LayoutParams layoutParams2 = (FrameLayout.LayoutParams) fab2.getLayoutParams();
-//        layoutParams2.rightMargin += (int) (fab2.getWidth() * 1.5);
-//        layoutParams2.bottomMargin += (int) (fab2.getHeight() * 1.5);
-//        fab2.setLayoutParams(layoutParams2);
-//        fab2.startAnimation(show_fab_2);
-//        fab2.setClickable(true);
-//
-//        //Floating Action Button 3
-//        FrameLayout.LayoutParams layoutParams3 = (FrameLayout.LayoutParams) fab3.getLayoutParams();
-//        layoutParams3.rightMargin += (int) (fab3.getWidth() * 0.25);
-//        layoutParams3.bottomMargin += (int) (fab3.getHeight() * 1.7);
-//        fab3.setLayoutParams(layoutParams3);
-//        fab3.startAnimation(show_fab_3);
-//        fab3.setClickable(true);
-    }
-
-    private void hideFloatingActionButton() {
-//        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) fab1.getLayoutParams();
-//        layoutParams.rightMargin -= (int) (fab1.getWidth() * 1.7);
-//        layoutParams.bottomMargin -= (int) (fab1.getHeight() * 0.25);
-//        fab1.setLayoutParams(layoutParams);
-//        fab1.startAnimation(hide_fab_1);
-//        fab1.setClickable(false);
-//
-//        //Floating Action Button 2
-//        FrameLayout.LayoutParams layoutParams2 = (FrameLayout.LayoutParams) fab2.getLayoutParams();
-//        layoutParams2.rightMargin -= (int) (fab2.getWidth() * 1.5);
-//        layoutParams2.bottomMargin -= (int) (fab2.getHeight() * 1.5);
-//        fab2.setLayoutParams(layoutParams2);
-//        fab2.startAnimation(hide_fab_2);
-//        fab2.setClickable(false);
-//
-//        //Floating Action Button 3
-//        FrameLayout.LayoutParams layoutParams3 = (FrameLayout.LayoutParams) fab3.getLayoutParams();
-//        layoutParams3.rightMargin -= (int) (fab3.getWidth() * 0.25);
-//        layoutParams3.bottomMargin -= (int) (fab3.getHeight() * 1.7);
-//        fab3.setLayoutParams(layoutParams3);
-//        fab3.startAnimation(hide_fab_3);
-//        fab3.setClickable(false);
     }
 
     private void openCamera() {
@@ -453,22 +362,4 @@ public class MyReportsFragment extends Fragment implements View.OnClickListener{
         }
 //        addThemToView(docPaths);
     }
-
-//    private void addThemToView(ArrayList<String> docPaths) {
-//        ArrayList<String> filePaths = new ArrayList<>();
-//
-//        if(docPaths!=null)
-//            filePaths.addAll(docPaths);
-//
-////        if(my_reports_recycler_view!=null) {
-////            StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3, OrientationHelper.VERTICAL);
-////            layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
-////            my_reports_recycler_view.setLayoutManager(layoutManager);
-////            my_reports_recycler_view.setItemAnimator(new DefaultItemAnimator());
-////        }
-//
-//        Toast.makeText(getActivity(), "Num of files selected: "+ filePaths.get(0), Toast.LENGTH_SHORT).show();
-//    }
-
-
 }

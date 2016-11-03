@@ -139,7 +139,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
      */
     public void setViewPager(ViewPager viewPager) {
         mTabStrip.removeAllViews();
-        int[] myColorArray = {Color.parseColor("#FFA72A")};
+        int[] myColorArray = {Color.parseColor("#00E676")};
         mTabStrip.setSelectedIndicatorColors(myColorArray);
         mViewPager = viewPager;
         if (viewPager != null) {

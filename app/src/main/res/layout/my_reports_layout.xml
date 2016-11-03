@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:measureAllChildren="true">
 
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_reports_recycler_view"
         android:layout_width="match_parent"
@@ -35,7 +36,26 @@
             android:layout_weight="0.79" />
     </RelativeLayout>
 
+
+
+    <FrameLayout
+        android:id="@+id/fl_interceptor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:descendantFocusability="blocksDescendants" />
+
+    <RelativeLayout
+        android:id="@+id/record_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:visibility="gone">
+
+        <include layout="@layout/add_record_dialog" />
+    </RelativeLayout>
+
     <RelativeLayout xmlns:fab="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/floating_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -103,34 +123,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_person_black_24dp"
+                android:visibility="gone"
                 fab:fab_label="My Post Only"
-                fab:fab_size="mini"
-                android:visibility="gone"/>
+                fab:fab_size="mini" />
         </com.github.clans.fab.FloatingActionMenu>
     </RelativeLayout>
 
     <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:id="@+id/fab_add_reports"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="bottom|end"-->
-        <!--android:layout_margin="10dp"-->
-        <!--android:padding="5dp"-->
-        <!--app:fabSize="normal"-->
-        <!--android:src="@drawable/ic_add_circle_green_dark_24dp">-->
+    <!--android:id="@+id/fab_add_reports"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="bottom|end"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:padding="5dp"-->
+    <!--app:fabSize="normal"-->
+    <!--android:src="@drawable/ic_add_circle_green_dark_24dp">-->
 
     <!--</android.support.design.widget.FloatingActionButton>-->
 
     <!--<include layout="@layout/fab_layout" />-->
-
-    <RelativeLayout
-        android:id="@+id/record_dialog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:visibility="gone">
-
-        <include layout="@layout/add_record_dialog" />
-    </RelativeLayout>
 
 </FrameLayout>

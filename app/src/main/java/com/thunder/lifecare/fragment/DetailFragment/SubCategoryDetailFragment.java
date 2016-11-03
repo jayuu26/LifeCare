@@ -103,7 +103,10 @@ public class SubCategoryDetailFragment extends Fragment implements AppBarLayout.
         System.out.println("vertical offset : " + verticalOffset) ;
         if (verticalOffset == 0) {
             // Collapsed
-            handler.postDelayed(runnable, 2000);
+            if (handler != null) {
+                handler.removeCallbacks(runnable);
+                handler.postDelayed(runnable, 2000);
+            }
         } else {
             // Not collapsed
             if (handler != null) {
