@@ -15,6 +15,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Url;
 
 /**
  * Created by ist on 3/9/16.
@@ -33,6 +34,15 @@ public interface RestCall {
      */
     @GET("rest/AccountDetail/getAccountDetailByUserId/{userID}")
     Call<HomeRootObject> getMainCategoryByUserId(@Path("userID") String userID);
+
+
+    /**
+     *
+     * GET CALL NORMAL
+     *
+     * */
+    @GET
+    Call<ResponseBody> sendGetRequest(@Url String url);
 
     /************* Other Call *************/
 

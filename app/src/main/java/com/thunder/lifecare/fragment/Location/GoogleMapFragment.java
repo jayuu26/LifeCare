@@ -21,12 +21,15 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -38,6 +41,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.thunder.lifecare.R;
+import com.thunder.lifecare.constant.CollectionObject;
 import com.thunder.lifecare.service.LocationService;
 import com.thunder.lifecare.util.AppUtills;
 import com.thunder.lifecare.util.LocationUtills;
@@ -45,7 +49,12 @@ import com.thunder.lifecare.util.LocationUtills;
 import java.io.IOException;
 import java.util.List;
 
-public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, LocationListener {
+public class GoogleMapFragment extends Fragment implements LocationListener,
+        GoogleMap.OnCameraMoveStartedListener,
+        GoogleMap.OnCameraMoveListener,
+        GoogleMap.OnCameraMoveCanceledListener,
+        GoogleMap.OnCameraIdleListener,
+        OnMapReadyCallback {
 
     final int PERMISSION_REQUEST_CODE = 1;
     final int PERMISSION_REQUEST_CODE1 = 2;
@@ -58,6 +67,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, L
     private GoogleMap mGoogleMap;
     private double mLatitude, mLongitude;
     private Marker locationMarker;
+    boolean mMapIsTouched =false;
 
     public enum Single {
         INSTANCE;
@@ -91,15 +101,17 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, L
             mainView = (ViewGroup) inflater.inflate(
                     R.layout.googlemap_view_layout, container, false);
             mContext = getActivity();
-            AppUtills.setActionBarTitle("Select Location "," Location Address", ((AppCompatActivity) getActivity()).getSupportActionBar(), getActivity(), true);
-
+            AppUtills.setActionBarTitle("Location ", CollectionObject.LOCATION_ADDRESS, ((AppCompatActivity) getActivity()).getSupportActionBar(), getActivity(), true);
             AppUtills.checkPermission(getActivity(), mContext, PERMISSION_REQUEST_CODE, Manifest.permission.ACCESS_FINE_LOCATION);
             initView();
         } catch (Exception exception) {
             exception.printStackTrace();
         }
+
         return mainView;
     }
+
+
 
     void initView(){
         location = LocationService.getmCurrentLocation();
@@ -164,6 +176,9 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, L
                 } else {
                 }
                 locationManager.requestLocationUpdates(bestProvider, 20000, 0, this);
+
+                mGoogleMap.moveCamera(CameraUpdateFactory
+                        .newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 16.0f));
             }
 
         } catch (Exception e) {
@@ -174,7 +189,12 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, L
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.mGoogleMap = googleMap;
+
         Log.v("LocationChanged", "IN onMapReady ");
+        mGoogleMap.setOnCameraIdleListener(this);
+        mGoogleMap.setOnCameraMoveStartedListener(this);
+        mGoogleMap.setOnCameraMoveListener(this);
+        mGoogleMap.setOnCameraMoveCanceledListener(this);
         initMap();
     }
 
@@ -385,12 +405,52 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, L
             @Override
             public void onCameraChange(CameraPosition arg0) {
                 LatLng centerOfMap = mGoogleMap.getCameraPosition().target;
-                new GetLocationAdd(centerOfMap.latitude, centerOfMap.longitude, mContext, locationTxt, mContext.getResources().getString(R.string.getting_location));
+//                new GetLocationAdd(centerOfMap.latitude, centerOfMap.longitude, mContext, locationTxt, mContext.getResources().getString(R.string.getting_location));
                 mLatitude = centerOfMap.latitude;
                 mLongitude = centerOfMap.longitude;
             }
         });
+ }
+
+    @Override
+    public void onCameraMoveStarted(int reason) {
+
+        if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE) {
+//            Toast.makeText(mContext, "The user gestured on the map.",
+//                    Toast.LENGTH_SHORT).show();
+        } else if (reason == GoogleMap.OnCameraMoveStartedListener
+                .REASON_API_ANIMATION) {
+//            Toast.makeText(mContext, "The user tapped something on the map.",
+//                    Toast.LENGTH_SHORT).show();
+        } else if (reason == GoogleMap.OnCameraMoveStartedListener
+                .REASON_DEVELOPER_ANIMATION) {
+//            Toast.makeText(mContext, "The app moved the camera.",
+//                    Toast.LENGTH_SHORT).show();
+        }
     }
+
+    @Override
+    public void onCameraMove() {
+//        Toast.makeText(mContext, "The camera is moving.",
+//                Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCameraMoveCanceled() {
+//        Toast.makeText(mContext, "Camera movement canceled.",
+//                Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCameraIdle() {
+//        Toast.makeText(mContext, "Finding Location.",
+//                Toast.LENGTH_SHORT).show();
+        LatLng centerOfMap = mGoogleMap.getCameraPosition().target;
+        new GetLocationAdd(centerOfMap.latitude, centerOfMap.longitude, mContext, locationTxt, mContext.getResources().getString(R.string.getting_location));
+        mLatitude = centerOfMap.latitude;
+        mLongitude = centerOfMap.longitude;
+    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
